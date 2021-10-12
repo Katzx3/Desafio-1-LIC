@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="Mes de consulta" style="height: 50px; vertical-align: middle; text-align: center;">
-    <p style="position: relative; font-size: xx-large;" >Presupuesto del mes de 
+    <p style="position: relative; font-size: xx-large; color: black; padding: 20px; vertical-align: middle;" >Presupuesto del mes de 
         <script>
             var d = new Date();
                 var month = new Array();
@@ -54,6 +54,14 @@
                     <span id="amount__spent"></span>
                 </div>
             </div>
+            <div id="percent" class="number">
+                <small>Porcentaje</small>
+                <div class="amount__container">
+                    <p id="percent__symbol">%</p>
+                    <span id="amount__percent"></span>
+                </div>
+            </div>
+            
         </div>
         <div class="input__area">
             <input type="text" id="description" placeholder="Description">
