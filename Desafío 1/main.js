@@ -1,62 +1,62 @@
-//ITEM CONTROLLER
+//Controlador de items
 const itemCtrl = (function(){
-    //item contructor
+    //constructor del item
     const Item = function(id, description, amount){
         this.id = id;
         this.description = description;
         this.amount = amount;
     }
-    //data structure
+    //estructura de datos
     const data = {
         items:[]
     }
-    //public method
+    //metodo publico
     return{
         logData: function(){
             return data;
         },
         addMoney: function(description, amount){
-            //create random id
+            //crear id aleatorio
             let ID = itemCtrl.createID();
-            //create new item
+            //crear nuevo item
             newMoney = new Item(ID, description, amount);
-            //push it into the array
+            //push en el array
             data.items.push(newMoney);
 
             return newMoney;
         },
         createID: function(){
-            //create random id number between 0 and 10000
+            //genera un numero aleatorio
             const idNum = Math.floor(Math.random()*10000);
             return idNum;
         },
         getIdNumber: function(item){
-            //get the item id
+            //recuperar id de item
             const amountId = (item.parentElement.id);
-            //break the id into an array
+            //serparar el id
             const itemArr = amountId.split('-');
-            //get the id number
+            //obtener numero de item
             const id = parseInt(itemArr[1]);
 
             return id;
         },
         deleteAmountArr: function(id){
-            //get all the ids
+            //obtener todos los ids
             const ids = data.items.map(function(item){
-                //return item with id
+                //retornar los id
                 return item.id
             });
-            //get index
+            //obtener indice
             const index = ids.indexOf(id)
-            //remove item
+            //remover item
             data.items.splice(index, 1);
         }
     }
 })();
 
-//UI CONTROLLER
+//Controlador de interfaz
 const UICtrl = (function(){
-    //ui selectors
+    //selectores de interfaz
     const UISelectors = {
         incomeBtn: '#add__income',
         expenseBtn: '#add__expense',
@@ -71,9 +71,9 @@ const UICtrl = (function(){
         expenseItem: '.expense__amount',
         itemsContainer: '.items__container'
     }
-    //public methods
+    //metodos publicos
     return{
-        //return ui selectors
+        //retornar selector de interfaz
         getSelectors: function(){
             return UISelectors
         },
@@ -88,13 +88,13 @@ const UICtrl = (function(){
             }
         },
         addIncomeItem: function(item){
-            //create new div
+            //crear nuevo div
             const div = document.createElement('div');
-            //add class
+            //agregar clase
             div.classList = 'item income'
-            //add id to the item
+            //agregar id al item
             div.id = `item-${item.id}`
-            //add html
+            //agregar html
             div.innerHTML = `
             <h4>${item.description}</h4>
             <div class="item__income">
@@ -103,7 +103,7 @@ const UICtrl = (function(){
             </div>
             <i class="far fa-trash-alt"></i>
             `;
-            //insert income into the list
+            //insertar ingresos en la lista
             document.querySelector(UISelectors.incomeList).insertAdjacentElement('beforeend', div);
         },
         clearInputs: function(){
@@ -111,25 +111,25 @@ const UICtrl = (function(){
             document.querySelector(UISelectors.amount).value = ''
         },
         updateEarned: function(){
-            //all income elements
+            //todos los elementos de ingresos
             const allIncome = document.querySelectorAll(UISelectors.incomeItem);
-            //array with all incomes
+            //arreglo con todos los ingresos
             const incomeCount = [...allIncome].map(item => +item.innerHTML);
-            //calculate the total earned
+            //calcular total de ingresos
             const incomeSum = incomeCount.reduce(function(a,b){
                 return a+b
             },0);
-            //display the total earned
+            //mostrar total de ingresos
             const earnedTotal = document.querySelector(UISelectors.moneyEarned).innerHTML = incomeSum.toFixed(2);
         },
         addExpenseItem: function(item){
-            //create new div
+            //crear nuevo div
             const div = document.createElement('div');
-            //add class
+            //agregar clase
             div.classList = 'item expense'
-            //add id to the item
+            //agregar id al item
             div.id = `item-${item.id}`
-            //add html
+            //agregar html
             div.innerHTML = `
             <h4>${item.description}</h4>
             <div class="item__expense">
@@ -138,19 +138,19 @@ const UICtrl = (function(){
             </div>
             <i class="far fa-trash-alt"></i>
             `;
-            //insert income into the list
+            //insertar ingresos en la lista
             document.querySelector(UISelectors.expensesList).insertAdjacentElement('beforeend', div);
         },
         updateSpent: function(){
-            //all expenses elements
+            //todos los elementos de gastos
             const allExpenses = document.querySelectorAll(UISelectors.expenseItem);
-            //array with all expenses
+            //arreglo con todos los gastos
             const expenseCount = [...allExpenses].map(item => +item.innerHTML)
-            //calculate the total
+            //calcular total
             const expenseSum = expenseCount.reduce(function(a, b){
                 return a+b
             },0)
-            // display the total spent
+            // mostrar total de gastos
             const expensesTotal = document.querySelector(UISelectors.moneySpent).innerHTML = expenseSum;
         },
         updateAvailable: function(){
@@ -160,11 +160,11 @@ const UICtrl = (function(){
             available.innerHTML = ((+earned.innerHTML)-(+spent.innerHTML)).toFixed(2)
         },
         deleteAmount: function(id){
-            //create the id we will select
+            //crear el id que será seleccionado
             const amountId = `#item-${id}`;
-            //select the amount with the id we passed
+            //seleccionar la cantidad de dinero del id seleccionado
             const amountDelete = document.querySelector(amountId);
-            //remove from ui
+            //remover de la interfas
             amountDelete.remove();
         }
     }
