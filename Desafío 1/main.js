@@ -170,81 +170,81 @@ const UICtrl = (function(){
     }
 })();
 
-//APP CONTROLLER
+//Controlador de aplicación
 const App = (function(){
-    //event listeners
+    //eventos
     const loadEventListeners = function(){
-        //get ui selectors
+        //obtener selectores de interfaz
         const UISelectors = UICtrl.getSelectors();
-        //add new income
+        //agregar nuevo ingreso
         document.querySelector(UISelectors.incomeBtn).addEventListener('click', addIncome);
-        //add new expense
+        //agregar nuevo gasto
         document.querySelector(UISelectors.expenseBtn).addEventListener('click', addExpense);
-        //delete item
+        //borrar item
         document.querySelector(UISelectors.itemsContainer).addEventListener('click', deleteItem);
     }
 
-    //add new income
+    //agregar nuevo ingreso
     const addIncome = function(){
-        //get description and amount values
+        //obtener descripción del ingreso
         const description = UICtrl.getDescriptionInput();
         const amount = UICtrl.getValueInput();
-        //if inputs are not empty
+        //si los formulatios no estan vaciós
         if(description.descriptionInput !=='' && amount.amountInput !== ''){
             //add new item
             const newMoney = itemCtrl.addMoney(description.descriptionInput, amount.amountInput);
-            //add item to the list
+            //agregar item a la lista
             UICtrl.addIncomeItem(newMoney);
-            //clear inputs
+            //limpiar entradas
             UICtrl.clearInputs();
-            //update earned
+            //actualizar ingresos
             UICtrl.updateEarned();
-            //calculate money available
+            //calcylar salgo disponible
             UICtrl.updateAvailable();
         }
     }
 
-    //add new expense
+    //agregar nuevo gasto
     const addExpense = function(){
-        //get description and amount values
+        //obtener dscripciones y montos
         const description = UICtrl.getDescriptionInput();
         const amount = UICtrl.getValueInput();
-        //if inputs are not empty
+        //si no está vació el cuadro de ingresos
         if(description.descriptionInput !=='' && amount.amountInput !== ''){
-            //add new item
+            //agregar nuevo item
             const newMoney = itemCtrl.addMoney(description.descriptionInput, amount.amountInput);
-            //add item to the list
+            //agregar item a la lista
             UICtrl.addExpenseItem(newMoney);
-            //clear inputs
+            //limpiar entrada
             UICtrl.clearInputs();
-            //update total spent
+            //actualuuzar total de gastos
             UICtrl.updateSpent();
-            //calculate money available
+            //ccalcular monto disponible
             UICtrl.updateAvailable();
         }
     }
 
-    //delete item
+    //borrar entrada
     const deleteItem = function(e){
         if(e.target.classList.contains('far')){
-            //get id number
+            //gobtener id
             const id = itemCtrl.getIdNumber(e.target)
-            //delete amount from ui
+            //borrar monto de la interfas
             UICtrl.deleteAmount(id);
-            //delete amount from data
+            //borrar monto de los datos
             itemCtrl.deleteAmountArr(id);
-            //update earned
+            //actualizar ingresos
             UICtrl.updateEarned();
-            //update total spent
+            //update actualizar gastos
             UICtrl.updateSpent();
-            //calculate money available
+            //calcular disponibles
             UICtrl.updateAvailable();
         }
 
         e.preventDefault()
     }
 
-    //init function
+    //init de la función
     return{
         init: function(){
             loadEventListeners();
