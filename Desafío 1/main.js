@@ -65,6 +65,7 @@ const UICtrl = (function(){
         moneyEarned: '#amount__earned',
         moneyAvailable: '#amount__available',
         moneySpent: '#amount__spent',
+        moneyPercent: '#amount__percent',
         incomeList: '#income__container',
         expensesList: '#expenses__container',
         incomeItem: '.income__amount',
@@ -159,6 +160,7 @@ const UICtrl = (function(){
             const available = document.querySelector(UISelectors.moneyAvailable);
             available.innerHTML = ((+earned.innerHTML)-(+spent.innerHTML)).toFixed(2)
         },
+       
         deleteAmount: function(id){
             //crear el id que será seleccionado
             const amountId = `#item-${id}`;
