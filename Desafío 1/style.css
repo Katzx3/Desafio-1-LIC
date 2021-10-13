@@ -118,7 +118,7 @@ body{
 
 .container .item{
     width: 100%;
-    background-color: white;
+    background-color: slategray;
     border-radius: 15px;
     margin: 5px 0;
     display: flex;

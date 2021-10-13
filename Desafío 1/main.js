@@ -168,6 +168,13 @@ const UICtrl = (function(){
             const amountDelete = document.querySelector(amountId);
             //remover de la interfas
             amountDelete.remove();
+        },
+        
+        updatePercent: function(){
+            const earned = document.querySelector(UISelectors.moneyEarned);
+            const spent = document.querySelector(UISelectors.moneySpent)
+            const available = document.querySelector(UISelectors.moneyPercent);
+            available.innerHTML = ((spent.innerHTML)/(earned.innerHTML)*100).toFixed(2)
         }
     }
 })();
@@ -223,6 +230,7 @@ const App = (function(){
             UICtrl.updateSpent();
             //ccalcular monto disponible
             UICtrl.updateAvailable();
+            UICtrl.updatePercent();
         }
     }
 
@@ -241,6 +249,7 @@ const App = (function(){
             UICtrl.updateSpent();
             //calcular disponibles
             UICtrl.updateAvailable();
+            UICtrl.updatePercent();
         }
 
         e.preventDefault()
