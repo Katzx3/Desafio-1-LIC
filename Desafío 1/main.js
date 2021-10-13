@@ -174,7 +174,7 @@ const UICtrl = (function(){
             const earned = document.querySelector(UISelectors.moneyEarned);
             const spent = document.querySelector(UISelectors.moneySpent)
             const available = document.querySelector(UISelectors.moneyPercent);
-            available.innerHTML = ((spent.innerHTML)/(earned.innerHTML)*100).toFixed(2)
+            available.innerHTML = Math.round(((spent.innerHTML)/(earned.innerHTML)*100).toFixed(2))
         }
     }
 })();
