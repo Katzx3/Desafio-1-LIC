@@ -65,6 +65,7 @@ const UICtrl = (function(){
         moneyEarned: '#amount__earned',
         moneyAvailable: '#amount__available',
         moneySpent: '#amount__spent',
+        moneyPercent: '#amount__percent',
         incomeList: '#income__container',
         expensesList: '#expenses__container',
         incomeItem: '.income__amount',
@@ -159,6 +160,7 @@ const UICtrl = (function(){
             const available = document.querySelector(UISelectors.moneyAvailable);
             available.innerHTML = ((+earned.innerHTML)-(+spent.innerHTML)).toFixed(2)
         },
+       
         deleteAmount: function(id){
             //crear el id que será seleccionado
             const amountId = `#item-${id}`;
@@ -166,6 +168,13 @@ const UICtrl = (function(){
             const amountDelete = document.querySelector(amountId);
             //remover de la interfas
             amountDelete.remove();
+        },
+        
+        updatePercent: function(){
+            const earned = document.querySelector(UISelectors.moneyEarned);
+            const spent = document.querySelector(UISelectors.moneySpent)
+            const available = document.querySelector(UISelectors.moneyPercent);
+            available.innerHTML = Math.round(((spent.innerHTML)/(earned.innerHTML)*100).toFixed(2))
         }
     }
 })();
@@ -201,6 +210,7 @@ const App = (function(){
             UICtrl.updateEarned();
             //calcylar salgo disponible
             UICtrl.updateAvailable();
+            UICtrl.updatePercent();
         }
     }
 
@@ -221,6 +231,7 @@ const App = (function(){
             UICtrl.updateSpent();
             //ccalcular monto disponible
             UICtrl.updateAvailable();
+            UICtrl.updatePercent();
         }
     }
 
@@ -239,6 +250,7 @@ const App = (function(){
             UICtrl.updateSpent();
             //calcular disponibles
             UICtrl.updateAvailable();
+            UICtrl.updatePercent();
         }
 
         e.preventDefault()
