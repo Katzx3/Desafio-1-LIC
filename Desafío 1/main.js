@@ -210,6 +210,7 @@ const App = (function(){
             UICtrl.updateEarned();
             //calcylar salgo disponible
             UICtrl.updateAvailable();
+            UICtrl.updatePercent();
         }
     }
 
